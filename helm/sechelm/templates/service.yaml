@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "firsthelm.fullname" . }}
+  name: {{ include "sechelm.fullname" . }}
   labels:
-{{ include "firsthelm.labels" . | indent 4 }}
+    {{- include "sechelm.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,5 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: {{ include "firsthelm.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "sechelm.selectorLabels" . | nindent 4 }}
